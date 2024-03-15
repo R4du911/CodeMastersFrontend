@@ -1,1 +1,70 @@
-<p>register works!</p>
+<div class="wrapper">
+    <h2>
+      <span> Register Employee </span>
+    </h2>
+    <div class="container1">
+      <form [formGroup]="registerForm" class="wrapper">
+        <mat-form-field>
+          <mat-label>First Name</mat-label>
+          <input
+            matInput
+            formControlName="firstName"
+            placeholder="Enter first name"
+            required
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Last Name</mat-label>
+          <input
+            matInput
+            formControlName="lastName"
+            placeholder="Enter last name"
+            required
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" placeholder="Enter email" />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Username</mat-label>
+          <input
+            matInput
+            formControlName="username"
+            placeholder="Enter username"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Password</mat-label>
+          <input
+            matInput
+            type="password"
+            formControlName="password"
+            placeholder="Enter password"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Role</mat-label>
+          <input matInput formControlName="role" placeholder="Enter role" />
+        </mat-form-field>
+      </form>
+    </div>
+    <div class="button-container">
+      <button
+        mat-flat-button
+        color="accent"
+        class="text-white"
+        [disabled]="registerForm.invalid"
+        (click)="onSubmit()"
+        style="margin-right: 8px;" 
+
+      >
+        Save
+      </button>
+      <button mat-flat-button class="gray-outline mx-3"     style="margin-left: 8px;"
+        (click)="closeModal()">
+        Cancel
+      </button>
+    </div>
+  </div>
+  

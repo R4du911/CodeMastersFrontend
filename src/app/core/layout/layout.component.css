@@ -1,141 +1,51 @@
-nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: center;
-    background-color: rgb(215, 174, 174);
-    font-family: "Montserrat", sans-serif;
-    width: 100%;
-    z-index: 9999;
-  }
-  
-  .maincontainer {
-    background-image: url("https://img.freepik.com/free-vector/white-abstract-wallpaper_23-2148830026.jpg?w=2000");
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 100%;
-  }
-  
-  .heading {
-    color: white;
-    text-transform: uppercase;
-    letter-spacing: 5px;
-    font-size: 20px;
-  }
-  .username {
-    position: absolute;
-    top: 1;
-    right: 0;
-    padding: 1rem;
-    font-weight: bold;
-    color: #fff;
-  }
-  
-  @media (max-width: 600px) {
-    nav {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-    .nav-links {
-      margin-top: 1rem;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
-    .nav-links li {
-      margin: 0.5rem 0;
-    }
-    .username {
-      position: static;
-      margin-top: 1rem;
-    }
-  }
-  
-  /* For screens larger than 600px */
-  @media (min-width: 600px) {
-    nav {
-      justify-content: space-around;
-    }
-    .nav-links {
-      width: auto;
-      display: flex;
-      flex-direction: row;
-    }
-    .nav-links li {
-      margin: 0 1rem;
-    }
-    .username {
-      position: absolute;
-      top: 1;
-      right: 0;
-    }
-  }
-  
-  .nav-links {
-    display: flex;
-    justify-content: space-around;
-    width: 20%;
-  }
-  
-  .nav-links li {
-    list-style: none;
-  }
-  
-  .nav-links a {
-    color: white;
-    text-decoration: none;
-    letter-spacing: 3px;
-    font-weight: bold;
-    font-size: 14px;
-    padding: 14px 16px;
-    cursor: pointer;
-  }
-  
-  .nav-links a:hover:not(.active) {
-    background-color: rgb(19, 94, 90);
-  }
-  
-  .nav-links li a.active {
-    background-color: rgb(0, 61, 61);
-  }
-  
-  .nav-links li a:hover {
-    background-color: rgb(19, 94, 90);
-  }
-  
-  @media screen and (min-device-width: 320px) and (-webkit-min-device-pixel-ratio: 2) {
-    nav {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-      background-color: rgb(0, 61, 61);
-      font-family: "Montserrat", sans-serif;
-    }
-    .heading {
-      color: white;
-      text-transform: uppercase;
-      font-size: 40px;
-    }
-  
-    .nav-links a {
-      color: white;
-      text-decoration: none;
-      letter-spacing: 3px;
-      font-weight: bold;
-      font-size: 20px;
-      padding: 14px 16px;
-      cursor: pointer;
-    }
-  
-    .nav-links {
-      display: flex;
-      justify-content: space-around;
-    }
-  }
-  
+.futuristic-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1a1a1a;
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo-image {
+  width: 40px; /* Adjust size as needed */
+  height: 40px;
+  margin-right: 10px;
+}
+
+.logo-text {
+  font-size: 18px;
+  color: #fff;
+  margin: 0;
+}
+
+.nav-links {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.nav-links li:last-child {
+  margin-right: 0;
+}
+
+.nav-links li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
+
+.nav-links li a:hover {
+  color: #ff00ff; /* Change to desired hover color */
+}

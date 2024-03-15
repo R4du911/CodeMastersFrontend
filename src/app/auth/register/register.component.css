@@ -1,0 +1,16 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+}
+
+mat-form-field {
+  width: 19rem;
+}

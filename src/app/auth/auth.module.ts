@@ -20,6 +20,7 @@ import {MatButtonModule} from '@angular/material/button';
     ReactiveFormsModule,
     FormsModule,
     RouterModule,
+    AuthRoutingModule,
     MatFormFieldModule,
     MatDialogModule,
     MatInputModule,

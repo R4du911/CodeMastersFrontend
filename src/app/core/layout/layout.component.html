@@ -1,1 +1,11 @@
-<p>layout works!</p>
+    <nav>
+      <div class="heading">
+        <h4>Culture Challenge</h4>
+      </div>
+      <ul class="nav-links">
+        <li><a [routerLink]="['/app/home']">Home</a></li>
+        <li><a [routerLink]="['/app/ranking']">Ranking</a></li>
+        <li><a [routerLink]="['/app/quests']">Quests</a></li>
+      </ul>
+    </nav>
+  <router-outlet></router-outlet>

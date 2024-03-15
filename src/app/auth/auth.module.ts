@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { AuthRoutingModule } from './auth-routing.module';
 import { RegisterComponent } from './register/register.component';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './login/components/login.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -16,8 +16,7 @@ import {MatButtonModule} from '@angular/material/button';
   declarations: [RegisterComponent, LoginComponent],
   imports: [
     CommonModule,
-    AuthRoutingModule,
-    RouterModule,
+    FormsModule,
     ReactiveFormsModule,
     FormsModule,
     RouterModule,
@@ -26,5 +25,7 @@ import {MatButtonModule} from '@angular/material/button';
     MatInputModule,
     MatButtonModule
   ],
+  providers: [
+  ]
 })
 export class AuthModule {}

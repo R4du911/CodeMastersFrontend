@@ -6,14 +6,16 @@ import { map } from 'rxjs';
   providedIn: 'root'
 })
 export class MapService {
-  url: string = 'http://localhost:8080/desk/desks';
+  url: string = 'http://localhost:8080/booking';
 
   constructor(
     private http: HttpClient
   ) { }
 
-  getLeftDesks() {
-    return this.http.get(`${this.url}/left`).pipe(map((response:any) => console.log(response)));
+  getDeskAvailability(id:any) {
+    return this.http.get(`${this.url}/${id}`).pipe(map((response: any) => {
+        return response.available
+      }));
 
   }
 }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MapService } from '../map/services/map.service';
 
 @Component({
   selector: 'app-second-top-component',
@@ -6,8 +7,31 @@ import { Component } from '@angular/core';
   styleUrl: './second-top-component.component.css'
 })
 export class SecondTopComponentComponent {
-  desks = { '1': [[1.1, 2], [1.2, 0], [1.3, 1], [1.4, 2]], '2': [[2.1, 0], [2.2, 1], [2.3, 1], [2.4, 0]] }
-  rooms: { [key: string]: any } = { 'Quick 8': [] }
+  desks: { [key: string]: any } = { '15': [15.1, 15.2, 15.3, 15.4], '16': [16.1, 16.2, 16.3, 16.4] }
+  rooms: string[] = [ 'Quick 8']
+
+
+  desk_availability: { [key: string]: any } = {}
+
+  constructor(private mapService: MapService) { }
+
+  ngOnInit() {
+    for (let key of Object.keys(this.desks)) {
+      for (let value of this.desks[key]) {
+        this.mapService.getDeskAvailability(value).subscribe(response => {
+          this.desk_availability[value] = response;
+        });
+
+      }
+    }
+
+    for (let room of this.rooms) {
+      this.mapService.getDeskAvailability(room).subscribe(response => {
+        this.desk_availability[room] = response;
+      });
+    }
+
+  }
 
   getRoomKeys() {
     return Object.keys(this.rooms);

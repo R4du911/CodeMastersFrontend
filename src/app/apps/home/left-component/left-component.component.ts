@@ -8,13 +8,23 @@ import { MapService } from '../map/services/map.service';
 })
 export class LeftComponentComponent implements OnInit {
 
-  desks: { [key: string]: [] } = {}
+  desks: {[key:string]:any} = { '1': [1.1, 1.2, 1.3, 1.4], '2': [2.1, 2.2, 2.3, 2.4], '3': [3.1, 3.2, 3.3, 3.4] }
+
+
+  desk_availability: { [key: string]: any } = {}
 
   constructor(private mapService: MapService) { }
 
   ngOnInit() {
-    this.mapService.getLeftDesks().subscribe();
-}
+    for (let key of Object.keys(this.desks)) {
+      for (let value of this.desks[key]) {
+        this.mapService.getDeskAvailability(value).subscribe(response => {
+          this.desk_availability[value] = response;
+        });
 
-    
+      }
+    }
+
+
+  }
 }

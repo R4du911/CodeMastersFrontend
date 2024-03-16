@@ -1,23 +1,26 @@
 <div class="components">
   <div class="desks" *ngFor="let key of (desks | keyvalue | slice:0:3)">
     <ng-container *ngFor="let value of key.value">
-      <button [ngClass]="{
-        'available' : value[1] == 0,
-        'partially' : value[1] == 1,
-        'booked': value[1] == 2}" class="desk">
+      <button class="desk" [ngClass]="{
+        'available' : desk_availability[value] == 0 || desk_availability[value] == undefined,
+        'partially' : desk_availability[value] == 1,
+        'booked': desk_availability[value] == 2}">
 </button>
     </ng-container>
   </div>
-  <div class="rooms" *ngFor="let key of getRoomKeys()">
-    <button [ngClass]="{
-        'available' : rooms[key] == 0,
-        'partially' : rooms[key] == 1,
-        'booked': rooms[key] == 2}" class="room">
-      {{key}}
+  <div class="rooms" *ngFor="let room of rooms">
+    <button  class="room" [ngClass]="{
+        'available' : desk_availability[room] == 0 || desk_availability[room] == undefined,
+        'partially' : desk_availability[room] == 1,
+        'booked': desk_availability[room] == 2}">
+      {{room}}
     </button>
   </div>
   <div class="desks" *ngFor="let key of (desks | keyvalue | slice:3:11)">
-    <button class="desk" *ngFor="let value of key.value">
+    <button class="desk" *ngFor="let value of key.value" [ngClass]="{
+        'available' : desk_availability[value] == 0 || desk_availability[value] == undefined,
+        'partially' : desk_availability[value] == 1,
+        'booked': desk_availability[value] == 2}">
     </button>
   </div>
 

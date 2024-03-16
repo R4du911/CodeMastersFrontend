@@ -27,7 +27,7 @@ export class AuthenticationService {
     sessionStorage.removeItem('token');
     this.setCurrentUser(null);
 
-    this.router.navigate(['/login']);
+    this.router.navigate(['/auth/login']);
   }
 
   getLoggedInUsername(): string | null {

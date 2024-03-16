@@ -8,6 +8,7 @@ import {ErrorHandlingService} from "../../../utils/error-handling/service/error-
 import {Subject, takeUntil} from "rxjs";
 import {LoginResponse} from "../model/login-response";
 import {CustomErrorResponse} from "../../../utils/error-handling/model/custom-error-response";
+import {AuthorizationService} from "../../../core/authorization/service/authorization.service";
 
 @Component({
   selector: 'app-login',
@@ -25,6 +26,7 @@ export class LoginComponent implements OnDestroy{
     private router: Router,
     private loginService: LoginService,
     private authenticationService: AuthenticationService,
+    private authorizationService: AuthorizationService,
     private handleErrorService: ErrorHandlingService,
   ) {}
 
@@ -47,6 +49,7 @@ export class LoginComponent implements OnDestroy{
       .subscribe((loginResponse: LoginResponse) => {
           sessionStorage.setItem('token', loginResponse.accessToken);
 
+          this.authorizationService.getUserRoles();
           this.authenticationService.setCurrentUser(this.authenticationService.getLoggedInUsername());
 
           this.router.navigateByUrl('/app/home');

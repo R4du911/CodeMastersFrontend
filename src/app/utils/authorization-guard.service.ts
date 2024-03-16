@@ -15,7 +15,11 @@ export class AuthorizationGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     if (this.authenticationService.isLoggedIn() && state.url.includes('login')) {
-      return this.router.createUrlTree(['home']);
+      return this.router.createUrlTree(['app/home']);
+    }
+
+    if (this.authenticationService.isLoggedIn() && state.url.includes('home')) {
+      return true;
     }
 
     if (!this.authenticationService.isLoggedIn() && state.url.includes('login')) {
@@ -23,7 +27,7 @@ export class AuthorizationGuard implements CanActivate {
     }
 
     if (!this.authenticationService.isLoggedIn()) {
-      return this.router.createUrlTree(['home']);
+      return this.router.createUrlTree(['auth/login']);
     }
 
     return this.authorizationService.hasRoles(route.data['roles']);

@@ -1,7 +1,13 @@
+.all {
+  background-color: #1a1a1a;
+  border:medium solid yellow;
+}
 .map-container {
-  flex:1;
-  width:100%;
-  background-image:url('../../../../../assets/map_bckg.png');
-  background-position:center center;
-  background-repeat:no-repeat;
+  flex: 1;
+  width: 100%;
+  background-image: url('../../../../../assets/map.png');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size:60%;
+  
 }

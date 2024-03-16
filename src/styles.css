@@ -1,7 +1,9 @@
 .background-image {
   background-image: url("../src/assets/WhatsApp\ Image\ 2024-03-15\ at\ 19.09.37.jpeg");
-  background-size: contain;
-  background-repeat:round;
+  background-color:black;
+  background-size: 60%;
+  background-repeat:no-repeat;
+  background-position:center;
 }
 html,
 body {

@@ -31,45 +31,20 @@ export class BottomComponentComponent implements OnInit {
   ngOnInit() {
     for (let key of Object.keys(this.desks)) {
       for (let value of this.desks[key]) {
-        this.mapService.getDeskAvailability(value).subscribe((response) => {
+        this.mapService.getDeskAvailability(value, new Date()).subscribe(response => {
           this.desk_availability[value] = response;
         });
       }
     }
 
     for (let room of this.rooms) {
-      this.mapService.getDeskAvailability(room).subscribe((response) => {
-        this.desk_availability[room] = response;
-      });
+      this.mapService.getDeskAvailability(room, new Date()).subscribe(response => {
+          this.desk_availability[room] = response;
+        });
+
     }
+    console.log(new Date())
   }
 
-  getAvailability(id: string) {
-    return;
-  }
-
-  openModal(value:string): Observable<boolean | undefined> {
-    if (this.dialogOpen) {
-      return of();
-    }
-
-    const dialogRef: MatDialogRef<ModalInfoDeskComponent, boolean> =
-      this.dialog.open(ModalInfoDeskComponent, {
-        width: '25rem',
-        disableClose: true,
-        autoFocus: false,
-        hasBackdrop: true,
-      });
-
-    dialogRef.afterOpened().subscribe(() => {
-      this.dialogOpen = true;
-    });
-
-    dialogRef.afterClosed().subscribe(() => {
-      this.dialogOpen = false;
-    });
-
-    return dialogRef.afterClosed();
-  }
 
 }

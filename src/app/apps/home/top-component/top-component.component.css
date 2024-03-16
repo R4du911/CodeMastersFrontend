@@ -18,7 +18,7 @@
   margin: 2px;
   height: 30px;
   width: 50px;
-  background-image: url('../../../../assets/desk.png');
+  background-image: url('../../../../assets/desk2.png');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center center;
@@ -32,6 +32,9 @@
   width: 100px;
   border: thin solid black;
   border-radius: 30px;
+  font-family:'Bauhaus 93';
+  font-size:18px;
+  font-weight:100;
 }
 .available {
   background-color: #7ac38f;

@@ -18,7 +18,7 @@ export class LeftComponentComponent implements OnInit {
   ngOnInit() {
     for (let key of Object.keys(this.desks)) {
       for (let value of this.desks[key]) {
-        this.mapService.getDeskAvailability(value).subscribe(response => {
+        this.mapService.getDeskAvailability(value, new Date()).subscribe(response => {
           this.desk_availability[value] = response;
         });
 

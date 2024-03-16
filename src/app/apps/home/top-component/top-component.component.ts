@@ -22,7 +22,7 @@ export class TopComponentComponent {
   ngOnInit() {
     for (let key of Object.keys(this.desks)) {
       for (let value of this.desks[key]) {
-        this.mapService.getDeskAvailability(value).subscribe(response => {
+        this.mapService.getDeskAvailability(value, new Date()).subscribe(response => {
           this.desk_availability[value] = response;
         });
 
@@ -30,7 +30,7 @@ export class TopComponentComponent {
     }
 
     for (let room of this.rooms) {
-        this.mapService.getDeskAvailability(room).subscribe(response => {
+      this.mapService.getDeskAvailability(room, new Date()).subscribe(response => {
           this.desk_availability[room] = response;
         });
       }

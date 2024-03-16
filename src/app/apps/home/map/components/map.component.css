@@ -1,6 +1,6 @@
 .all {
   background-color: #1a1a1a;
-  border:medium solid yellow;
+  border:thin solid yellow;
 }
 .map-container {
   flex: 1;

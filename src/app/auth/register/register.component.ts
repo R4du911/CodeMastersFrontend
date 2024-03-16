@@ -1,5 +1,11 @@
 import { Component, OnDestroy } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { RegisterRequest } from './model/register-request';
@@ -27,7 +33,7 @@ export class RegisterComponent implements OnDestroy {
   isSignUpFailed = false;
   errorMessage = '';
   succesMessage = '';
-  registerForm: FormGroup = new FormGroup({});
+  registerForm: UntypedFormGroup;
   private key: string = '1234567890123456';
   private _componentDestroy$ = new Subject<void>();
   protected readonly ERoleMapping = ERoleMapping;
@@ -36,11 +42,14 @@ export class RegisterComponent implements OnDestroy {
   constructor(
     private dialog: MatDialog,
     private router: Router,
+    private fb: FormBuilder,
     private registerService: RegisterService,
     private authenticationService: AuthenticationService,
     private authorizationService: AuthorizationService,
     private handleErrorService: ErrorHandlingService
-  ) {}
+  ) {
+    this.registerForm = this.initializeForm();
+  }
 
   ngOnInit() {
     this.initializeForm();
@@ -105,14 +114,31 @@ export class RegisterComponent implements OnDestroy {
     return o1 === o2;
   }
 
-  private initializeForm(): void {
-    this.registerForm = new FormGroup({
-      firstName: new FormControl('', [Validators.required]),
-      lastName: new FormControl('', [Validators.required]),
-      email: new FormControl('', [Validators.required]),
-      username: new FormControl('', [Validators.required]),
-      password: new FormControl('', [Validators.required]),
-      role: new FormControl('', [Validators.required]),
+  private initializeForm() {
+    return this.fb.group({
+      firstName: [
+        '',
+        [Validators.required, Validators.pattern('^[a-zA-Z][a-zA-Z]+$')],
+      ],
+      lastName: [
+        '',
+        [Validators.required, Validators.pattern('^[a-zA-Z][a-zA-Z]+$')],
+      ],
+      username: ['', [Validators.required, Validators.maxLength(15)]],
+      email: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(
+            '^[a-zA-Z0-9]+[-]?[a-zA-Z0-9]+(?:\\.[a-zA-Z0-9]+[-]?[a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:\\.[a-zA-Z]+)+$'
+          ),
+        ],
+      ],
+      role: ['', [Validators.required]],
+      password: [
+        '',
+        [Validators.required, Validators.pattern('^[\\s\\S]{8,}$')],
+      ],
     });
   }
 
@@ -121,9 +147,77 @@ export class RegisterComponent implements OnDestroy {
     return CryptoJS.AES.encrypt(value, key, { iv: key }).toString();
   }
 
+  getErrorMessageFirstName() {
+    if (this.registerForm.get('firstName')!.hasError('required')) {
+      return 'First name is required';
+    }
+
+    if (this.registerForm.get('firstName')!.hasError('pattern')) {
+      return 'First name can only contain letters';
+    }
+
+    return '';
+  }
+
+  getErrorMessageLastName() {
+    if (this.registerForm.get('lastName')!.hasError('required')) {
+      return 'Last name is required';
+    }
+
+    if (this.registerForm.get('lastName')!.hasError('pattern')) {
+      return 'Last name can only contain letters';
+    }
+
+    return '';
+  }
+
+  getErrorMessageUsername() {
+    if (this.registerForm.get('username')!.hasError('required')) {
+      return 'Username is required';
+    }
+
+    if (this.registerForm.get('username')!.hasError('whiteSpace')) {
+      return 'Can not contain white spaces';
+    }
+
+    if (this.registerForm.get('username')!.hasError('maxlength')) {
+      return 'Not more than 15 characters long';
+    }
+
+    return '';
+  }
+
+  getErrorMessageEmail() {
+    if (this.registerForm.get('email')!.hasError('required')) {
+      return 'Email is required';
+    }
+
+    if (this.registerForm.get('email')!.hasError('pattern')) {
+      return 'Invalid email format';
+    }
+
+    return '';
+  }
+
   getErrorMessageRole() {
     if (this.registerForm.get('role')!.hasError('required')) {
       return 'Role is required';
+    }
+
+    return '';
+  }
+
+  getErrorMessagePassword() {
+    if (this.registerForm.get('password')!.hasError('required')) {
+      return 'Password is required';
+    }
+
+    if (this.registerForm.get('password')!.hasError('pattern')) {
+      return 'Password must contain min 8 characters';
+    }
+
+    if (this.registerForm.get('password')!.hasError('whiteSpace')) {
+      return 'Can not contain white spaces';
     }
 
     return '';

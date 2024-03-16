@@ -12,9 +12,9 @@ export class MapService {
     private http: HttpClient
   ) { }
 
-  getDeskAvailability(id:any) {
-    return this.http.get(`${this.url}/${id}`).pipe(map((response: any) => {
-        return response.available
+  getDeskAvailability(id:any, date:any) {
+    return this.http.post(`${this.url}/${id}`, { date } ).pipe(map((response: any) => {
+      return response;
       }));
 
   }

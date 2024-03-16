@@ -26,6 +26,21 @@ export class MapService {
     );
   }
 
+  getAllBookingDesksByDate(id: any, date: Request) {
+    const start_date = this.formatDate(date.start_date) + 'T07:00:00';
+    const end_date = this.formatDate(date.end_date) + 'T19:00:00';
+    const da = {
+      start_date,
+      end_date
+    };
+
+    return this.http.post<Request>(`${this.url}/day/${id}`, da).pipe(
+      map((response: any) => {
+        return response;
+      })
+    );
+  }
+
   private formatDate(date: string): string {
     const dateObj = new Date(date);
     const year = dateObj.getFullYear();

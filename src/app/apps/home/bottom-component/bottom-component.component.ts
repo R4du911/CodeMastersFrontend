@@ -1,7 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MapService } from '../map/services/map.service';
 import { Observable, catchError, map, of, take } from 'rxjs';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { ModalInfoDeskComponent } from '../modal-info-desk/modal-info-desk.component';
 import { EventService } from '../../../core/layout/event_service/event.service';
 
@@ -53,5 +57,28 @@ export class BottomComponentComponent implements OnInit {
 
   }
 
+  openModal(value: string): Observable<boolean | undefined> {
+    if (this.dialogOpen) {
+      return of();
+    }
 
+    const dialogRef: MatDialogRef<ModalInfoDeskComponent, boolean> =
+      this.dialog.open(ModalInfoDeskComponent, {
+        width: '32rem',
+        disableClose: true,
+        autoFocus: false,
+        hasBackdrop: true,
+        data: { id: value }, // Pass the data as an object with the key 'id'
+      });
+
+    dialogRef.afterOpened().subscribe(() => {
+      this.dialogOpen = true;
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.dialogOpen = false;
+    });
+
+    return dialogRef.afterClosed();
+  }
 }

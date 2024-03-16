@@ -1,7 +1,18 @@
-<div>
-    <h2>Choose an interval:</h2>
-    <div *ngFor="let interval of intervals">
-      <button>{{ interval }}</button>
+<div class="wrapper">
+  <h2 class="modal-title">
+    <span> Book a desk </span>
+  </h2>
+  <div class="interval-grid">
+    <div *ngFor="let interval of intervals" class="interval-item">
+      <button mat-raised-button color="primary" [disabled]="isBookingDisabled(interval)">
+        {{ interval }}
+      </button>
     </div>
   </div>
-  
+  <button mat-flat-button color="accent" class="text-white" style="margin-right: 8px">
+    Save
+  </button>
+  <button mat-flat-button class="gray-outline mx-3" style="margin-left: 8px" (click)="closeModal()">
+    Cancel
+  </button>
+</div>

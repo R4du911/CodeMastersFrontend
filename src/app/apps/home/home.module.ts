@@ -11,13 +11,15 @@ import { SecondTopComponentComponent } from './second-top-component/second-top-c
 import { TopComponentComponent } from './top-component/top-component.component';
 import { TopOfBottomComponentComponent } from './top-of-bottom-component/top-of-bottom-component.component';
 import { MapComponent } from './map/components/map.component';
-
+import { ModalInfoDeskComponent } from './modal-info-desk/modal-info-desk.component';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
-  declarations: [HomeComponent, MapComponent, LeftComponentComponent, BottomComponentComponent, SecondTopComponentComponent, TopComponentComponent, TopOfBottomComponentComponent],
+  declarations: [ModalInfoDeskComponent,HomeComponent, MapComponent, LeftComponentComponent, BottomComponentComponent, SecondTopComponentComponent, TopComponentComponent, TopOfBottomComponentComponent],
   imports: [
     CommonModule,
     HomeRoutingModule,
+    MatButtonModule,
     MatIconModule,
   ],
   providers: [

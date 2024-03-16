@@ -8,7 +8,7 @@ import { TopOfBottomComponentComponent } from '../../top-of-bottom-component/top
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
-  styleUrls: ['./map.component.css'],
+  styleUrls: ['./map.component.css']
 })
 export class MapComponent implements AfterViewInit {
 

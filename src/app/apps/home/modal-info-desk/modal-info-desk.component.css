@@ -1,0 +1,15 @@
+.wrapper {
+    text-align: center;
+  }
+  
+  .interval-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    grid-gap: 10px;
+  }
+  
+  .interval-item {
+    display: flex;
+    justify-content: center;
+  }
+  

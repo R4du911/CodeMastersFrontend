@@ -21,9 +21,11 @@ export class TopOfBottomComponentComponent {
   constructor(private mapService: MapService) { }
 
   ngOnInit() {
+    const currentDate = new Date();
+    const request: any = { start_date: currentDate, end_date: currentDate };
     for (let key of Object.keys(this.desks)) {
       for (let value of this.desks[key]) {
-        this.mapService.getDeskAvailability(value, new Date()).subscribe(response => {
+        this.mapService.getDeskAvailability(value,request).subscribe(response => {
           this.desk_availability[value] = response;
         });
 
@@ -31,8 +33,8 @@ export class TopOfBottomComponentComponent {
     }
 
     for (let key of Object.keys(this.special_desks)) {
-      for (let value of this.desks[key]) {
-        this.mapService.getDeskAvailability(value, new Date()).subscribe(response => {
+      for (let value of this.special_desks[key]) {
+        this.mapService.getDeskAvailability(value, request).subscribe(response => {
           this.desk_availability[value] = response;
 
         });

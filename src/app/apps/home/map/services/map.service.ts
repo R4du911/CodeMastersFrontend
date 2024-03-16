@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { map } from 'rxjs';
-import { DatePipe } from '@angular/common';
+import { Request } from './request';
 
 @Injectable({
   providedIn: 'root'
@@ -9,16 +9,32 @@ import { DatePipe } from '@angular/common';
 export class MapService {
   url: string = 'http://localhost:8080/booking';
 
-  constructor(
-    private http: HttpClient, private datePipe: DatePipe
-  ) { }
+  constructor(private http: HttpClient) { }
 
-  getDeskAvailability(id: any, date: any) {
-    var start_date = this.datePipe.transform(date, 'YYYY-MM-DD') + ' 07:00:00';
-    var end_date = this.datePipe.transform(date, 'YYYY-MM-DD') + ' 19:00:00';
-    return this.http.post(`${this.url}/${id}`, { start_date, end_date }).pipe(map((response: any) => {
-      return response;
-      }));
+  getDeskAvailability(id: any, date: Request) {
+    const start_date = this.formatDate(date.start_date) + 'T07:00:00';
+    const end_date = this.formatDate(date.end_date) + 'T19:00:00';
+    const da = {
+      start_date,
+      end_date
+    };
 
+    return this.http.post<Request>(`${this.url}/${id}`, da).pipe(
+      map((response: any) => {
+        return response;
+      })
+    );
+  }
+
+  private formatDate(date: string): string {
+    const dateObj = new Date(date);
+    const year = dateObj.getFullYear();
+    const month = this.padZeroes(dateObj.getMonth() + 1);
+    const day = this.padZeroes(dateObj.getDate());
+    return `${year}-${month}-${day}`;
+  }
+
+  private padZeroes(num: number): string {
+    return num < 10 ? '0' + num : num.toString();
   }
 }

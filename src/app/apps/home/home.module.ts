@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 
 import { HomeRoutingModule } from './home-routing.module';
@@ -18,6 +18,9 @@ import { MapComponent } from './map/components/map.component';
     CommonModule,
     HomeRoutingModule,
     MatIconModule,
-  ]
+  ],
+  providers: [
+    DatePipe,
+  ],
 })
 export class HomeModule { }

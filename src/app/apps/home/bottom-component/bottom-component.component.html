@@ -10,9 +10,7 @@
           partially: desk_availability[value] == 1,
           booked: desk_availability[value] == 2
         }"
-        (click)="openModal(value)"
       >
-        >
       </button>
     </ng-container>
   </div>
@@ -25,7 +23,6 @@
         partially: desk_availability[room] == 1,
         booked: desk_availability[room] == 2
       }"
-      (click)="openModal(room)"
     >
       {{ room }}
     </button>

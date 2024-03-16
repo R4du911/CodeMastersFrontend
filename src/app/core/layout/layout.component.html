@@ -6,7 +6,7 @@
   <ul class="nav-links">
     <li><a [routerLink]="['/app/home']">Home</a></li>
     <li><a *hasRoles="[ERole.Administrator]" (click)="openModal()">Register</a></li>
-    <li><a>History</a></li>
+    <li><a [routerLink]="['/app/history']">History</a></li>
     <li><a (click)="logout()">Logout</a></li>
   </ul>
 </nav>

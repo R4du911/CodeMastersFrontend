@@ -13,6 +13,11 @@ const routes: Routes = [
           import('../apps/home/home.module').then((m) => m.HomeModule),
       },
       {
+        path: 'history',
+        loadChildren: () =>
+          import('../apps/history/history.module').then((m) => m.HistoryModule),
+      },
+      {
         path: '**',
         redirectTo: 'error',
       },

@@ -1,0 +1,46 @@
+.components{
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    align-items:center;
+    margin-top:20px;
+}
+.desks {
+  margin: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  width: 120px;
+  
+}
+
+.desk {
+  margin: 2px;
+  height: 30px;
+  width: 50px;
+  background-image: url('../../../../assets/desk.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+  border: thin solid black;
+  border-radius: 30px;
+}
+
+.room {
+  margin: 2px;
+  height: 60px;
+  width: 100px;
+  border: thin solid black;
+  border-radius: 30px;
+}
+
+.available {
+  background-color: #7ac38f;
+}
+
+.partially {
+  background-color: #f2fc9f;
+}
+
+.booked {
+  background-color: #f35c6e;
+}

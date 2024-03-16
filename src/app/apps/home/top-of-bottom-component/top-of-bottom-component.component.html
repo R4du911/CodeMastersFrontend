@@ -1,0 +1,12 @@
+<div class="components">
+  <div class="desks" *ngFor="let key of desks|keyvalue">
+    <ng-container *ngFor="let value of key.value">
+      <button [ngClass]="{
+        'available' : value[1] == 0,
+        'partially' : value[1] == 1,
+        'booked': value[1] == 2}" class="desk">
+      </button>
+    </ng-container>
+  </div>
+</div>
+

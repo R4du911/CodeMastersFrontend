@@ -1,0 +1,20 @@
+<div class="components">
+  <div class="rooms" *ngFor="let key of getRoomKeys()">
+  <button [ngClass]="{
+        'available' : rooms[key] == 0,
+        'partially' : rooms[key] == 1,
+        'booked': rooms[key] == 2}" class="room">
+    {{key}}
+  </button>
+  </div>
+  <div class="desks" *ngFor="let key of desks|keyvalue">
+    <ng-container *ngFor="let value of key.value">
+      <button [ngClass]="{
+        'available' : value[1] == 0,
+        'partially' : value[1] == 1,
+        'booked': value[1] == 2}" class="desk">
+      </button>
+    </ng-container>
+  </div>
+</div>
+

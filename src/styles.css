@@ -1,6 +1,7 @@
 .background-image {
-  background-image: url("../src/assets/WhatsApp\ Image\ 2024-03-15\ at\ 19.09.24.jpeg");
+  background-image: url("../src/assets/WhatsApp\ Image\ 2024-03-15\ at\ 19.09.37.jpeg");
   background-size: contain;
+  background-repeat:round;
 }
 html,
 body {

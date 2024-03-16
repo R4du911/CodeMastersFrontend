@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, Observable} from "rxjs";
 import {Router} from "@angular/router";
-import {HttpClient} from "@angular/common/http";
+import {BehaviorSubject, Observable} from "rxjs";
 import jwtDecode from "jwt-decode";
-import {RefreshTokenResponse} from "../../auth/login/model/refresh-token-response";
+import {HttpClient} from "@angular/common/http";
+import { RefreshTokenResponse } from '../../auth/login/model/refresh-token-response';
 
 @Injectable({
   providedIn: 'root'
@@ -16,11 +16,21 @@ export class AuthenticationService {
     this.getLoggedInUsername()
   );
 
+  private _firstLogin = false;
+
   constructor(
     private router: Router,
     private http: HttpClient
   ) {
     this.currentUser$ = this.currentUserSubject$.asObservable();
+  }
+
+  get firstLogin() {
+    return this._firstLogin;
+  }
+
+  set firstLogin(firstLogin: boolean) {
+    this._firstLogin = firstLogin;
   }
 
   logout() {
@@ -52,4 +62,5 @@ export class AuthenticationService {
   refreshToken() : Observable<RefreshTokenResponse> {
     return this.http.get<RefreshTokenResponse>(this.url + 'refreshToken');
   }
+
 }

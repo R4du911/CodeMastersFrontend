@@ -11,6 +11,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [RegisterComponent, LoginComponent],
@@ -24,7 +25,8 @@ import {MatButtonModule} from '@angular/material/button';
     MatFormFieldModule,
     MatDialogModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSelectModule
   ],
   providers: [
   ]

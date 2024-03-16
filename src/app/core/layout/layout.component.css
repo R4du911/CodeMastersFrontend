@@ -49,3 +49,20 @@
 .nav-links li a:hover {
   color: yellow;
 }
+
+.label, .toggle{
+    color:#1a1a1a;
+}
+
+.calendarBtn{
+    background:rgba(0,0,0,0);
+    border:none;
+}
+
+.calendar{
+    color:white;
+}
+
+.calendarBtn :hover {
+  color: yellow;
+}

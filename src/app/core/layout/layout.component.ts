@@ -4,6 +4,8 @@ import { RegisterComponent } from '../../auth/register/register.component';
 import { Observable, of } from 'rxjs';
 import {AuthenticationService} from "../authentication/authentication.service";
 import {ERole} from "../authorization/model/erole";
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { EventService } from './event_service/event.service';
 
 @Component({
   selector: 'app-layout',
@@ -12,10 +14,12 @@ import {ERole} from "../authorization/model/erole";
 })
 export class LayoutComponent {
   private dialogOpen = false;
+  public date: any;
 
   constructor(
     private dialog: MatDialog,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private eventService: EventService
   ) {}
 
   openModal(): Observable<boolean | undefined> {
@@ -40,6 +44,11 @@ export class LayoutComponent {
     });
 
     return dialogRef.afterClosed();
+  }
+
+  onDateSelected(event: MatDatepickerInputEvent<Date>): void {
+    const selectedDate: Date = event.value ?? new Date();
+    this.eventService.setSelectedDate(selectedDate);
   }
 
   logout() {

@@ -4,6 +4,15 @@
     <h4 class="logo-text">Book a desk and enjoy the office!</h4>
   </div>
   <ul class="nav-links">
+    <li style="margin-top:10px;">
+      <mat-form-field style="width:1px;visibility:hidden;">
+        <mat-label class="label">Choose a date</mat-label>
+        <input class="input" matInput [matDatepicker]="picker" (dateChange)="onDateSelected($event)">
+        <mat-datepicker-toggle class="toggle" matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <button class="calendarBtn" mat-button (click)="picker.open()"> <span class="material-icons calendar">calendar_today</span></button>
+    </li>
     <li><a [routerLink]="['/app/home']">Home</a></li>
     <li><a *hasRoles="[ERole.Administrator]" (click)="openModal()">Register</a></li>
     <li><a [routerLink]="['/app/history']">History</a></li>

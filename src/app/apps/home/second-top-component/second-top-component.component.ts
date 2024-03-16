@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MapService } from '../map/services/map.service';
+import { EventService } from '../../../core/layout/event_service/event.service';
 
 @Component({
   selector: 'app-second-top-component',
@@ -13,30 +14,31 @@ export class SecondTopComponentComponent {
 
   desk_availability: { [key: string]: any } = {}
 
-  constructor(private mapService: MapService) { }
+  constructor(private mapService: MapService, private eventService: EventService) { }
 
   ngOnInit() {
-    const currentDate = new Date();
-    const request: any = { start_date: currentDate, end_date: currentDate };
-    for (let key of Object.keys(this.desks)) {
-      for (let value of this.desks[key]) {
-        this.mapService.getDeskAvailability(value, request).subscribe(response => {
-          this.desk_availability[value] = response;
+
+    this.eventService.selectedDate$.subscribe(selectedDate => {
+      const request: any = { start_date: selectedDate, end_date: selectedDate };
+      console.log(request);
+      for (let key of Object.keys(this.desks)) {
+        for (let value of this.desks[key]) {
+          this.mapService.getDeskAvailability(value, request).subscribe(response => {
+            this.desk_availability[value] = response;
+          });
+        }
+      }
+
+      for (let room of this.rooms) {
+        this.mapService.getDeskAvailability(room, request).subscribe(response => {
+          this.desk_availability[room] = response;
         });
 
       }
-    }
-
-    for (let room of this.rooms) {
-      this.mapService.getDeskAvailability(room, request).subscribe(response => {
-        this.desk_availability[room] = response;
-      });
-    }
+    });
 
   }
 
-  getRoomKeys() {
-    return Object.keys(this.rooms);
-  }
+
 
 }

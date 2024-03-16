@@ -3,6 +3,7 @@ import { MapService } from '../map/services/map.service';
 import { Observable, catchError, map, of, take } from 'rxjs';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ModalInfoDeskComponent } from '../modal-info-desk/modal-info-desk.component';
+import { EventService } from '../../../core/layout/event_service/event.service';
 
 @Component({
   selector: 'app-bottom-component',
@@ -27,26 +28,29 @@ export class BottomComponentComponent implements OnInit {
   desk_availability: { [key: string]: any } = {};
   
 
-  constructor(private mapService: MapService, private dialog: MatDialog) {}
+  constructor(private mapService: MapService, private dialog: MatDialog, private eventService: EventService) { }
 
   ngOnInit() {
-    const currentDate = new Date();
-    const request: any = { start_date: currentDate, end_date: currentDate };
-    for (let key of Object.keys(this.desks)) {
-      for (let value of this.desks[key]) {
-        this.mapService.getDeskAvailability(value,request).subscribe(response => {
-          this.desk_availability[value] = response;
-        });
-      }
-    }
 
-    for (let room of this.rooms) {
-      this.mapService.getDeskAvailability(room, request).subscribe(response => {
+    this.eventService.selectedDate$.subscribe(selectedDate => {
+      const request: any = { start_date: selectedDate, end_date: selectedDate };
+      console.log(request);
+      for (let key of Object.keys(this.desks)) {
+        for (let value of this.desks[key]) {
+          this.mapService.getDeskAvailability(value, request).subscribe(response => {
+            this.desk_availability[value] = response;
+          });
+        }
+      }
+
+      for (let room of this.rooms) {
+        this.mapService.getDeskAvailability(room, request).subscribe(response => {
           this.desk_availability[room] = response;
         });
 
-    }
-    console.log(new Date())
+      }
+    });
+
   }
 
 

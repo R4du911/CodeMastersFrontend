@@ -4,10 +4,10 @@
   </h2>
   <div class="interval-grid">
     <div class="participants" [hidden]="!isRoom">
-      <input class="input "type="text" placeholder="Insert Nr. Of Participants" [value]="participants" />
+      <input class="input "type="text" placeholder="Insert Nr. Of Participants" [value]="participants" (input)="onParticipantsChange($event)" />
     </div>
     <div *ngFor="let interval of intervals" class="interval-item">
-      <button class="btn" (click)="onSubmit(interval)" mat-raised-button color="basic" [disabled]="isBookingDisabled(interval)">
+      <button class="btn" (click)="onSubmit(interval)" mat-raised-button color="basic" [disabled]="isBookingDisabled(interval) || capacityLessThanHalf()">
         {{ interval }}
       </button>
     </div>

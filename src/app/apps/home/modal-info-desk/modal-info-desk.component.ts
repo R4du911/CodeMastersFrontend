@@ -27,6 +27,7 @@ export class ModalInfoDeskComponent {
   isRoom: boolean = false;
   id: any;
   participants: any;
+  cap: any;
 
   constructor(
     private dialog: MatDialog,
@@ -44,7 +45,7 @@ export class ModalInfoDeskComponent {
     this.isRoom = this.data.isRoom;
     if (this.isRoom) {
       this.mapService.getRoomCapacity(this.id).subscribe((response) => {
-        console.log(response);
+        this.cap = response;
       });
     }
     const request: any = { start_date: currentDate, end_date: currentDate };
@@ -81,13 +82,15 @@ export class ModalInfoDeskComponent {
     if (!this.isRoom) {
       return false;
     }
-    //this.mapService.getRoomCapacity(this.id).subscribe((response:any) => {
-    //  if (this.participants < response/2) {
-    //    return true;
-    //  }
-    //  return false;
-    //})
+    if (this.participants >= this.cap / 2) {
+      return false;
+    }
     return true;
+  }
+
+  onParticipantsChange(event: any) {
+    const target = event.target as HTMLInputElement;
+    this.participants = target.value;
   }
 
   onSubmit(interval: string) {

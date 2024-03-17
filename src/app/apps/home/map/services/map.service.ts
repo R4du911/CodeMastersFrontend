@@ -54,13 +54,7 @@ export class MapService {
       })
     );
   }
-  //getRoomCapacity(id: any) {
-  //  return this.http.get(`${this.url}/roomCapacity/${id}`).pipe(
-  //    map((response: any) => {
-  //      return response;
-  //    })
-  //  );
-  //}
+
   getRoomCapacity(id: any) {
     return this.http.get(`${this.url2}/desks/roomCapacity/${id}`).pipe(
       map((response: any) => {

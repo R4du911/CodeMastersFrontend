@@ -1,6 +1,10 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { MapService } from '../map/services/map.service';
+import { AuthenticationService } from '../../../core/authentication/authentication.service';
+import { CustomErrorResponse } from '../../../utils/error-handling/model/custom-error-response';
+import { ErrorHandlingService } from '../../../utils/error-handling/service/error-handling.service';
+import { EventService } from '../../../core/layout/event_service/event.service';
 
 @Component({
   selector: 'app-modal-info-desk',
@@ -22,10 +26,14 @@ export class ModalInfoDeskComponent {
   bookings: any[] = [];
   isRoom: boolean = false;
   id: any;
-  participants: any ;
+  participants: any;
+
   constructor(
     private dialog: MatDialog,
     private mapService: MapService,
+    private handleErrorService: ErrorHandlingService,
+    private authenticationService: AuthenticationService,
+    private eventService: EventService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
@@ -57,10 +65,10 @@ export class ModalInfoDeskComponent {
   }
 
   isBookingDisabled(interval: string): boolean {
-    const intervalTime = interval.split('-')[0]; 
+    const intervalTime = interval.split('-')[0];
     return this.bookings.some((booking) => {
-      const startBookingTime = booking.startBookingTime.split('T')[1]; 
-      return intervalTime === startBookingTime
+      const startBookingTime = booking.startBookingTime.split('T')[1];
+      return intervalTime === startBookingTime;
     });
   }
 
@@ -75,6 +83,30 @@ export class ModalInfoDeskComponent {
     //  return false;
     //})
     return true;
-    
+  }
+
+  onSubmit(interval: string) {
+    this.eventService.selectedDate$.subscribe((date) => {
+      const start_date =
+      this.formatDate(date.toDateString()) + 'T' + interval.split('-')[0];
+    const end_date =
+      this.formatDate(date.toDateString()) + 'T' + interval.split('-')[1];
+
+      const request: any = {
+        deskId: this.data.id,
+        username: this.authenticationService.getLoggedInUsername(),
+        start_date: start_date,
+        end_date: end_date,
+      };
+
+      this.mapService.createBookingDesk(request).subscribe(
+        (response: any) => {
+          this.closeModal()
+        },
+        (error: CustomErrorResponse) => {
+          this.handleErrorService.handleError(error);
+        }
+      );
+    })
   }
 }

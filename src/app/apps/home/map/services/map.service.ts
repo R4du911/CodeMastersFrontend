@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { map } from 'rxjs';
-import { Request } from './request';
+import { CreateBookingDesk, Request } from './request';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MapService {
   url: string = 'http://localhost:8080/booking';
+  url1: string = 'http://localhost:8080/createBooking';
 
   constructor(private http: HttpClient) { }
 
@@ -41,6 +42,16 @@ export class MapService {
     );
   }
 
+  createBookingDesk(createBookingDesk:CreateBookingDesk) {
+    const start_date = this.formatDate(createBookingDesk.start_date) + 'T07:00:00';
+    const end_date = this.formatDate(createBookingDesk.end_date) + 'T19:00:00';
+
+    return this.http.post<CreateBookingDesk>(`${this.url1}`, createBookingDesk).pipe(
+      map((response: any) => {
+        return response;
+      })
+    );
+  }
   //getRoomCapacity(id: any) {
   //  return this.http.get(`${this.url}/roomCapacity/${id}`).pipe(
   //    map((response: any) => {

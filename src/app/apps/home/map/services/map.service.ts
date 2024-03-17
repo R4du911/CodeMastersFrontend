@@ -9,6 +9,8 @@ import { CreateBookingDesk, Request } from './request';
 export class MapService {
   url: string = 'http://localhost:8080/booking';
   url1: string = 'http://localhost:8080/createBooking';
+  url2: string = 'http://localhost:8080/desk';
+
 
   constructor(private http: HttpClient) { }
 
@@ -59,6 +61,14 @@ export class MapService {
   //    })
   //  );
   //}
+  getRoomCapacity(id: any) {
+    return this.http.get(`${this.url2}/desks/roomCapacity/${id}`).pipe(
+      map((response: any) => {
+        console.log(response)
+        return response;
+      })
+    );
+  }
 
   private formatDate(date: string): string {
     const dateObj = new Date(date);

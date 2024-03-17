@@ -42,6 +42,11 @@ export class ModalInfoDeskComponent {
     const currentDate = new Date();
     this.id = this.data.id;
     this.isRoom = this.data.isRoom;
+    if (this.isRoom) {
+      this.mapService.getRoomCapacity(this.id).subscribe((response) => {
+        console.log(response);
+      });
+    }
     const request: any = { start_date: currentDate, end_date: currentDate };
     this.mapService
       .getAllBookingDesksByDate(this.id, request)

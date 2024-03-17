@@ -16,7 +16,7 @@ export class TopComponentComponent {
     '7': [7.1, 7.2, 7.3, 7.4], '8': [8.1, 8.2, 8.3, 8.4], '9': [9.1, 9.2, 9.3, 9.4],
     '10': [10.1, 10.2, 10.3, 10.4], '11': [11.1, 11.2, 11.3, 11.4], '12': [12.1, 12.2, 12.3, 12.4],
     '13': [13.1, 13.2, 13.3, 13.4], '14': [14.1, 14.2, 14.3, 14.4] }
-  rooms: string[] = ['Pit-Lane', 'Dry-Lane', 'Joker Lap' ]
+  rooms: string[] = ['Pit-Lane', 'Dry-Lane', 'JokerLap' ]
   private dialogOpen = false;
 
   desk_availability: { [key: string]: any } = {}

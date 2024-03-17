@@ -40,7 +40,7 @@ export class TopOfBottomComponentComponent {
       }
 
       for (let key of Object.keys(this.special_desks)) {
-        for (let value of this.desks[key]) {
+        for (let value of this.special_desks[key]) {
           this.mapService.getDeskAvailability(value, request).subscribe(response => {
             this.desk_availability[value] = response;
           });

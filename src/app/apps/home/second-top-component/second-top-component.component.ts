@@ -12,7 +12,7 @@ import { ModalInfoDeskComponent } from '../modal-info-desk/modal-info-desk.compo
 })
 export class SecondTopComponentComponent {
   desks: { [key: string]: any } = { '15': [15.1, 15.2, 15.3, 15.4], '16': [16.1, 16.2, 16.3, 16.4] }
-  rooms: string[] = ['Quick 8']
+  rooms: string[] = ['Quick8']
   private dialogOpen = false;
 
 

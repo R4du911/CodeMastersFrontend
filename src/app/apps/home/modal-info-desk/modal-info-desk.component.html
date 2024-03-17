@@ -1,18 +1,21 @@
 <div class="wrapper">
   <h2 class="modal-title">
-    <span> Book a desk </span>
+    <span style="color: white; font-family: 'Bauhaus 93';"> When do you want to book your desk? </span>
   </h2>
   <div class="interval-grid">
+    <div class="participants" [hidden]="!isRoom">
+      <input class="input "type="text" placeholder="Insert Nr. Of Participants" [value]="participants" />
+    </div>
     <div *ngFor="let interval of intervals" class="interval-item">
-      <button mat-raised-button color="primary" [disabled]="isBookingDisabled(interval)">
+      <button class="btn" mat-raised-button color="basic" [disabled]="isBookingDisabled(interval)">
         {{ interval }}
       </button>
     </div>
   </div>
-  <button mat-flat-button color="accent" class="text-white" style="margin-right: 8px">
+  <button [disabled]="capacityLessThanHalf() "class="saveBtn" style=" color:black; font-family:'Bauhaus 93'; font-size:20px; margin-right: 8px; margin-top:20px; margin-bottom:20px;">
     Save
   </button>
-  <button mat-flat-button class="gray-outline mx-3" style="margin-left: 8px" (click)="closeModal()">
+  <button class="cancelBtn" style=" color: black; font-family: 'Bauhaus 93'; font-size: 20px;  margin-left: 8px; margin-top: 20px; margin-bottom: 20px; " (click)="closeModal()">
     Cancel
   </button>
 </div>

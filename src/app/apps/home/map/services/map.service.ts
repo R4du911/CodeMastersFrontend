@@ -41,6 +41,14 @@ export class MapService {
     );
   }
 
+  //getRoomCapacity(id: any) {
+  //  return this.http.get(`${this.url}/roomCapacity/${id}`).pipe(
+  //    map((response: any) => {
+  //      return response;
+  //    })
+  //  );
+  //}
+
   private formatDate(date: string): string {
     const dateObj = new Date(date);
     const year = dateObj.getFullYear();

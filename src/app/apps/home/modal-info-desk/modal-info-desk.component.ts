@@ -20,6 +20,9 @@ export class ModalInfoDeskComponent {
     '17:00:00-17:59:59',
   ];
   bookings: any[] = [];
+  isRoom: boolean = false;
+  id: any;
+  participants: any ;
   constructor(
     private dialog: MatDialog,
     private mapService: MapService,
@@ -27,10 +30,13 @@ export class ModalInfoDeskComponent {
   ) {}
 
   ngOnInit() {
+    this.participants = 'Insert nr of Participants';
     const currentDate = new Date();
+    this.id = this.data.id;
+    this.isRoom = this.data.isRoom;
     const request: any = { start_date: currentDate, end_date: currentDate };
     this.mapService
-      .getAllBookingDesksByDate(this.data.id, request)
+      .getAllBookingDesksByDate(this.id, request)
       .subscribe((bookings) => (this.bookings = bookings));
   }
 
@@ -56,5 +62,19 @@ export class ModalInfoDeskComponent {
       const startBookingTime = booking.startBookingTime.split('T')[1]; 
       return intervalTime === startBookingTime
     });
+  }
+
+  capacityLessThanHalf() {
+    if (!this.isRoom) {
+      return false;
+    }
+    //this.mapService.getRoomCapacity(this.id).subscribe((response:any) => {
+    //  if (this.participants < response/2) {
+    //    return true;
+    //  }
+    //  return false;
+    //})
+    return true;
+    
   }
 }

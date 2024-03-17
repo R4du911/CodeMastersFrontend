@@ -1,15 +1,46 @@
 .wrapper {
     text-align: center;
+    background-color:#1a1a1a;
   }
   
   .interval-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    display: flex;
+    flex-direction:column;
     grid-gap: 10px;
   }
-  
-  .interval-item {
-    display: flex;
-    justify-content: center;
-  }
-  
+
+.interval-item {
+  display: flex;
+  justify-content: center;
+  margin: 2px;
+}
+
+.saveBtn {
+  background-color: #f7ec77;
+  height:50px;
+  width:90px;
+  border:none;
+  border-radius:5px;
+}
+
+.cancelBtn {
+  background-color: #f7ec77;
+  height: 50px;
+  width: 90px;
+  border: none;
+  border-radius: 5px;
+}
+
+.input {
+  height: 40px;
+  border-radius: 60px;
+  box-shadow: inset 0px 0px 25px 0px #1a1a1a;
+  border: none;
+  outline: none;
+  background-color: white;
+
+}
+
+input::placeholder{
+    color:black;
+}

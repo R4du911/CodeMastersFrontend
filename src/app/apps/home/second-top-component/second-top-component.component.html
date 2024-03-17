@@ -3,7 +3,7 @@
   <button class="room" [ngClass]="{
         'available' : desk_availability[room] == 0 || desk_availability[room] == undefined,
         'partially' : desk_availability[room] == 1,
-        'booked': desk_availability[room] == 2}">
+        'booked': desk_availability[room] == 2}" (click)="openModal(room, true)">
     {{room}}
   </button>
   </div>
@@ -13,7 +13,7 @@
         <button class="desk" [ngClass]="{
         'available' : desk_availability[value] == 0 || desk_availability[value] == undefined,
         'partially' : desk_availability[value] == 1,
-        'booked': desk_availability[value] == 2}">
+        'booked': desk_availability[value] == 2}" (click)="openModal(value, false)">
         </button>
       </ng-container>
     </div>

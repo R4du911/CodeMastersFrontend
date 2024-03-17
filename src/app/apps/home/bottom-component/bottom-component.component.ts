@@ -57,7 +57,7 @@ export class BottomComponentComponent implements OnInit {
 
   }
 
-  openModal(value: string): Observable<boolean | undefined> {
+  openModal(value: string, isRoom:boolean): Observable<boolean | undefined> {
     if (this.dialogOpen) {
       return of();
     }
@@ -68,7 +68,7 @@ export class BottomComponentComponent implements OnInit {
         disableClose: true,
         autoFocus: false,
         hasBackdrop: true,
-        data: { id: value }, // Pass the data as an object with the key 'id'
+        data: { id: value, isRoom: isRoom}, // Pass the data as an object with the key 'id'
       });
 
     dialogRef.afterOpened().subscribe(() => {

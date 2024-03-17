@@ -4,6 +4,7 @@
   justify-content: center;
   align-items: center;
   padding: 2rem;
+  background-color: #1a1a1a;
 }
 
 .button-container {
@@ -14,3 +15,20 @@
 mat-form-field {
   width: 19rem;
 }
+
+.saveBtn {
+  background-color: #f7ec77;
+  height: 50px;
+  width: 90px;
+  border: none;
+  border-radius: 5px;
+}
+
+.cancelBtn {
+  background-color: #f7ec77;
+  height: 50px;
+  width: 90px;
+  border: none;
+  border-radius: 5px;
+}
+

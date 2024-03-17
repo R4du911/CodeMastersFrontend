@@ -10,7 +10,7 @@
           partially: desk_availability[value] == 1,
           booked: desk_availability[value] == 2
         }"
-        (click)="openModal(value)"
+        (click)="openModal(value, false)"
       >
       
       </button>
@@ -24,7 +24,7 @@
           desk_availability[room] == 0 || desk_availability[room] == undefined,
         partially: desk_availability[room] == 1,
         booked: desk_availability[room] == 2
-      }"
+      }" (click)="openModal(room, true)"
     >
       {{ room }}
     </button>

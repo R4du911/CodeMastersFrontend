@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MapService } from '../map/services/map.service';
 import { EventService } from '../../../core/layout/event_service/event.service';
+import { Observable, of } from 'rxjs';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ModalInfoDeskComponent } from '../modal-info-desk/modal-info-desk.component';
 
 @Component({
   selector: 'app-left-component',
@@ -13,8 +16,8 @@ export class LeftComponentComponent implements OnInit {
 
 
   desk_availability: { [key: string]: any } = {}
-
-  constructor(private mapService: MapService, private eventService: EventService) { }
+  private dialogOpen = false;
+  constructor(private mapService: MapService, private eventService: EventService, private dialog: MatDialog) { }
 
   ngOnInit() {
 
@@ -31,6 +34,31 @@ export class LeftComponentComponent implements OnInit {
 
     });
 
+  }
+
+  openModal(value: string, isRoom: boolean): Observable<boolean | undefined> {
+    if (this.dialogOpen) {
+      return of();
+    }
+
+    const dialogRef: MatDialogRef<ModalInfoDeskComponent, boolean> =
+      this.dialog.open(ModalInfoDeskComponent, {
+        width: '32rem',
+        disableClose: true,
+        autoFocus: false,
+        hasBackdrop: true,
+        data: { id: value, isRoom: isRoom }, // Pass the data as an object with the key 'id'
+      });
+
+    dialogRef.afterOpened().subscribe(() => {
+      this.dialogOpen = true;
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.dialogOpen = false;
+    });
+
+    return dialogRef.afterClosed();
   }
 
 }

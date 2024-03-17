@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { MapService } from '../map/services/map.service';
 import { EventService } from '../../../core/layout/event_service/event.service';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Observable, of } from 'rxjs';
+import { ModalInfoDeskComponent } from '../modal-info-desk/modal-info-desk.component';
 
 @Component({
   selector: 'app-top-component',
@@ -14,11 +17,11 @@ export class TopComponentComponent {
     '10': [10.1, 10.2, 10.3, 10.4], '11': [11.1, 11.2, 11.3, 11.4], '12': [12.1, 12.2, 12.3, 12.4],
     '13': [13.1, 13.2, 13.3, 13.4], '14': [14.1, 14.2, 14.3, 14.4] }
   rooms: string[] = ['Pit-Lane', 'Dry-Lane', 'Joker Lap' ]
-
+  private dialogOpen = false;
 
   desk_availability: { [key: string]: any } = {}
 
-  constructor(private mapService: MapService, private eventService: EventService) { }
+  constructor(private mapService: MapService, private eventService: EventService, private dialog: MatDialog) { }
 
   ngOnInit() {
 
@@ -43,4 +46,28 @@ export class TopComponentComponent {
 
   }
 
+  openModal(value: string, isRoom: boolean): Observable<boolean | undefined> {
+    if (this.dialogOpen) {
+      return of();
+    }
+
+    const dialogRef: MatDialogRef<ModalInfoDeskComponent, boolean> =
+      this.dialog.open(ModalInfoDeskComponent, {
+        width: '32rem',
+        disableClose: true,
+        autoFocus: false,
+        hasBackdrop: true,
+        data: { id: value, isRoom: isRoom }, // Pass the data as an object with the key 'id'
+      });
+
+    dialogRef.afterOpened().subscribe(() => {
+      this.dialogOpen = true;
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.dialogOpen = false;
+    });
+
+    return dialogRef.afterClosed();
+  }
 }

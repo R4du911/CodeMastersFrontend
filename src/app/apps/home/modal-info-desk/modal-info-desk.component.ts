@@ -111,6 +111,7 @@ export class ModalInfoDeskComponent {
         (response: any) => {
           this.closeModal();
           this.handleErrorService.handleSuccess('Created booking desh');
+          window.location.reload();
         },
         (error: CustomErrorResponse) => {
           this.handleErrorService.handleError(error);

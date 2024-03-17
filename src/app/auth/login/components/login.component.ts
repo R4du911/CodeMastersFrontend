@@ -1,33 +1,33 @@
-import {Component, OnDestroy} from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import CryptoJS from 'crypto-js';
-import {LoginRequest} from "../model/login-request";
-import {LoginService} from "../service/login.service";
-import {AuthenticationService} from "../../../core/authentication/authentication.service";
-import {ErrorHandlingService} from "../../../utils/error-handling/service/error-handling.service";
-import {Subject, takeUntil} from "rxjs";
-import {LoginResponse} from "../model/login-response";
-import {CustomErrorResponse} from "../../../utils/error-handling/model/custom-error-response";
-import {AuthorizationService} from "../../../core/authorization/service/authorization.service";
+import { LoginRequest } from '../model/login-request';
+import { LoginService } from '../service/login.service';
+import { AuthenticationService } from '../../../core/authentication/authentication.service';
+import { ErrorHandlingService } from '../../../utils/error-handling/service/error-handling.service';
+import { Subject, takeUntil } from 'rxjs';
+import { LoginResponse } from '../model/login-response';
+import { CustomErrorResponse } from '../../../utils/error-handling/model/custom-error-response';
+import { AuthorizationService } from '../../../core/authorization/service/authorization.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
-export class LoginComponent implements OnDestroy{
+export class LoginComponent implements OnDestroy {
   public username!: string;
   public password!: string;
   private key: string = '1234567890123456';
 
-  private _componentDestroy$ = new Subject<void>;
+  private _componentDestroy$ = new Subject<void>();
 
   constructor(
     private router: Router,
     private loginService: LoginService,
     private authenticationService: AuthenticationService,
     private authorizationService: AuthorizationService,
-    private handleErrorService: ErrorHandlingService,
+    private handleErrorService: ErrorHandlingService
   ) {}
 
   ngOnDestroy(): void {
@@ -44,17 +44,20 @@ export class LoginComponent implements OnDestroy{
     const encryptedPassword = this.encrypt(this.key, this.password);
 
     const loginRequest = new LoginRequest(this.username, encryptedPassword);
-    this.loginService.login(loginRequest)
+    this.loginService
+      .login(loginRequest)
       .pipe(takeUntil(this._componentDestroy$))
-      .subscribe((loginResponse: LoginResponse) => {
+      .subscribe(
+        (loginResponse: LoginResponse) => {
           sessionStorage.setItem('token', loginResponse.accessToken);
 
           this.authorizationService.getUserRoles();
-          this.authenticationService.setCurrentUser(this.authenticationService.getLoggedInUsername());
+          this.authenticationService.setCurrentUser(
+            this.authenticationService.getLoggedInUsername()
+          );
 
           this.router.navigateByUrl('/app/home');
-          this.handleErrorService.handleSuccess("Successfully logged in");
-
+          this.handleErrorService.handleSuccess('Successfully logged in');
         },
         (error: CustomErrorResponse) => {
           this.handleErrorService.handleError(error);

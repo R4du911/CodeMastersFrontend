@@ -11,9 +11,7 @@
           booked: desk_availability[value] == 2
         }"
         (click)="openModal(value, false)"
-      >
-      
-      </button>
+      ></button>
     </ng-container>
   </div>
   <div class="rooms" *ngFor="let room of rooms">
@@ -24,7 +22,8 @@
           desk_availability[room] == 0 || desk_availability[room] == undefined,
         partially: desk_availability[room] == 1,
         booked: desk_availability[room] == 2
-      }" (click)="openModal(room, true)"
+      }"
+      (click)="openModal(room, true)"
     >
       {{ room }}
     </button>

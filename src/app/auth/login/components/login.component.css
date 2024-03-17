@@ -17,7 +17,7 @@
   width: 25%;
   padding-top: 30px;
   border-radius: 60px;
-  background-color:rgba(255,255,255,0.4);
+  background-color: rgba(255, 255, 255, 0.4);
 }
 
 h1 {
@@ -26,7 +26,7 @@ h1 {
 }
 
 .button {
-  background-color: rgb(219, 208, 83,0.4);
+  background-color: rgb(219, 208, 83, 0.4);
 }
 
 .imgs {
@@ -58,9 +58,9 @@ input {
   background-color: #1a1a1a;
 }
 
-  input::placeholder {
-    color: rgba(249, 247, 119, 0.7);
-  }
+input::placeholder {
+  color: rgba(249, 247, 119, 0.7);
+}
 
 .test {
   margin-top: 25%;

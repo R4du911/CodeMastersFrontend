@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HistoryComponent } from './component/history.component';
-import {AuthorizationGuard} from "../../utils/authorization-guard.service";
+import { AuthorizationGuard } from '../../utils/authorization-guard.service';
 
 const routes: Routes = [
-  { path: 'history',
+  {
+    path: 'history',
     component: HistoryComponent,
-    canActivate: [AuthorizationGuard]
+    canActivate: [AuthorizationGuard],
   },
   { path: '', component: HistoryComponent },
   { path: '**', redirectTo: '' },

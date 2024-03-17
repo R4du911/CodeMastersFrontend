@@ -30,34 +30,38 @@ export class BottomComponentComponent implements OnInit {
   rooms: string[] = ['Pole-Position', 'Cockpit'];
   private dialogOpen = false;
   desk_availability: { [key: string]: any } = {};
-  
 
-  constructor(private mapService: MapService, private dialog: MatDialog, private eventService: EventService) { }
+  constructor(
+    private mapService: MapService,
+    private dialog: MatDialog,
+    private eventService: EventService
+  ) {}
 
   ngOnInit() {
-
-    this.eventService.selectedDate$.subscribe(selectedDate => {
+    this.eventService.selectedDate$.subscribe((selectedDate) => {
       const request: any = { start_date: selectedDate, end_date: selectedDate };
       console.log(request);
       for (let key of Object.keys(this.desks)) {
         for (let value of this.desks[key]) {
-          this.mapService.getDeskAvailability(value, request).subscribe(response => {
-            this.desk_availability[value] = response;
-          });
+          this.mapService
+            .getDeskAvailability(value, request)
+            .subscribe((response) => {
+              this.desk_availability[value] = response;
+            });
         }
       }
 
       for (let room of this.rooms) {
-        this.mapService.getDeskAvailability(room, request).subscribe(response => {
-          this.desk_availability[room] = response;
-        });
-
+        this.mapService
+          .getDeskAvailability(room, request)
+          .subscribe((response) => {
+            this.desk_availability[room] = response;
+          });
       }
     });
-
   }
 
-  openModal(value: string, isRoom:boolean): Observable<boolean | undefined> {
+  openModal(value: string, isRoom: boolean): Observable<boolean | undefined> {
     if (this.dialogOpen) {
       return of();
     }
@@ -68,7 +72,7 @@ export class BottomComponentComponent implements OnInit {
         disableClose: true,
         autoFocus: false,
         hasBackdrop: true,
-        data: { id: value, isRoom: isRoom}, // Pass the data as an object with the key 'id'
+        data: { id: value, isRoom: isRoom }, // Pass the data as an object with the key 'id'
       });
 
     dialogRef.afterOpened().subscribe(() => {

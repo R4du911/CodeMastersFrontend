@@ -1,14 +1,19 @@
-import {Directive, Input, OnDestroy, TemplateRef, ViewContainerRef} from '@angular/core';
-import {ERole} from "../model/erole";
-import {Subject, takeUntil} from "rxjs";
-import {AuthorizationService} from "../service/authorization.service";
+import {
+  Directive,
+  Input,
+  OnDestroy,
+  TemplateRef,
+  ViewContainerRef,
+} from '@angular/core';
+import { ERole } from '../model/erole';
+import { Subject, takeUntil } from 'rxjs';
+import { AuthorizationService } from '../service/authorization.service';
 
 @Directive({
   selector: '[hasRoles]',
-  standalone: true
+  standalone: true,
 })
-export class HasRolesDirective implements OnDestroy{
-
+export class HasRolesDirective implements OnDestroy {
   @Input() set hasRoles(roles: ERole[]) {
     this.updateView(roles);
   }
@@ -31,18 +36,15 @@ export class HasRolesDirective implements OnDestroy{
     this.authorizationService.userRoles$
       .pipe(takeUntil(this._directiveDestroy$))
       .subscribe(() => {
-        this.authorizationService
-          .hasRoles(roles)
-          .then((result: boolean) => {
-            if (result && !this.isHidden) {
-              this.viewContainer.createEmbeddedView(this.templateRef);
-              this.isHidden = true;
-            } else if (!result && this.isHidden) {
-              this.viewContainer.clear();
-              this.isHidden = false;
-            }
-          });
+        this.authorizationService.hasRoles(roles).then((result: boolean) => {
+          if (result && !this.isHidden) {
+            this.viewContainer.createEmbeddedView(this.templateRef);
+            this.isHidden = true;
+          } else if (!result && this.isHidden) {
+            this.viewContainer.clear();
+            this.isHidden = false;
+          }
+        });
       });
   }
-
 }

@@ -1,6 +1,8 @@
 <div class="wrapper">
   <h2>
-    <span style="color: white; font-family: 'Bauhaus 93';"> Register Employee </span>
+    <span style="color: white; font-family: 'Bauhaus 93'">
+      Register Employee
+    </span>
   </h2>
   <div class="container1">
     <form [formGroup]="registerForm" class="wrapper">
@@ -73,16 +75,26 @@
   </div>
   <div class="button-container">
     <button
-     class="saveBtn"
+      class="saveBtn"
       [disabled]="registerForm.invalid"
       (click)="onSubmit()"
-      style="margin-right: 8px; color: black; font-family: 'Bauhaus 93'; font-size: 20px;"
+      style="
+        margin-right: 8px;
+        color: black;
+        font-family: 'Bauhaus 93';
+        font-size: 20px;
+      "
     >
       Save
     </button>
     <button
       class="cancelBtn"
-      style="margin-left: 8px; color:black; font-family: 'Bauhaus 93'; font-size: 20px;"
+      style="
+        margin-left: 8px;
+        color: black;
+        font-family: 'Bauhaus 93';
+        font-size: 20px;
+      "
       (click)="closeModal()"
     >
       Cancel

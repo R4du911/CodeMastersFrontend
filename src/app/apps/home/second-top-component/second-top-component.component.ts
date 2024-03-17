@@ -8,39 +8,46 @@ import { ModalInfoDeskComponent } from '../modal-info-desk/modal-info-desk.compo
 @Component({
   selector: 'app-second-top-component',
   templateUrl: './second-top-component.component.html',
-  styleUrl: './second-top-component.component.css'
+  styleUrl: './second-top-component.component.css',
 })
 export class SecondTopComponentComponent {
-  desks: { [key: string]: any } = { '15': [15.1, 15.2, 15.3, 15.4], '16': [16.1, 16.2, 16.3, 16.4] }
-  rooms: string[] = ['Quick8']
+  desks: { [key: string]: any } = {
+    '15': [15.1, 15.2, 15.3, 15.4],
+    '16': [16.1, 16.2, 16.3, 16.4],
+  };
+  rooms: string[] = ['Quick8'];
   private dialogOpen = false;
 
+  desk_availability: { [key: string]: any } = {};
 
-  desk_availability: { [key: string]: any } = {}
-
-  constructor(private mapService: MapService, private eventService: EventService, private dialog: MatDialog) { }
+  constructor(
+    private mapService: MapService,
+    private eventService: EventService,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit() {
-
-    this.eventService.selectedDate$.subscribe(selectedDate => {
+    this.eventService.selectedDate$.subscribe((selectedDate) => {
       const request: any = { start_date: selectedDate, end_date: selectedDate };
       console.log(request);
       for (let key of Object.keys(this.desks)) {
         for (let value of this.desks[key]) {
-          this.mapService.getDeskAvailability(value, request).subscribe(response => {
-            this.desk_availability[value] = response;
-          });
+          this.mapService
+            .getDeskAvailability(value, request)
+            .subscribe((response) => {
+              this.desk_availability[value] = response;
+            });
         }
       }
 
       for (let room of this.rooms) {
-        this.mapService.getDeskAvailability(room, request).subscribe(response => {
-          this.desk_availability[room] = response;
-        });
-
+        this.mapService
+          .getDeskAvailability(room, request)
+          .subscribe((response) => {
+            this.desk_availability[room] = response;
+          });
       }
     });
-
   }
 
   openModal(value: string, isRoom: boolean): Observable<boolean | undefined> {
@@ -67,6 +74,4 @@ export class SecondTopComponentComponent {
 
     return dialogRef.afterClosed();
   }
-
-
 }

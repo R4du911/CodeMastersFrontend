@@ -1,10 +1,11 @@
-.components{
-    display:flex;
-    flex-direction:row;
-    justify-content:center;
-    align-items:center;
-    margin-bottom:0;
+.components {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0;
 }
+
 .desks {
   margin: 5px;
   display: flex;
@@ -16,7 +17,7 @@
   margin: 2px;
   height: 40px;
   width: 50px;
-  background-image: url('../../../../assets/desk3.png');
+  background-image: url("../../../../assets/desk3.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center center;

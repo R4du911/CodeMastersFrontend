@@ -1,34 +1,51 @@
 <div class="components">
   <div class="leftDesks">
-    <div class="desks" *ngFor="let key of (desks | keyvalue | slice:0:4)">
+    <div class="desks" *ngFor="let key of desks | keyvalue | slice : 0 : 4">
       <ng-container *ngFor="let value of key.value">
-        <button class="desk" [ngClass]="{
-        'available' : desk_availability[value] == 0 || desk_availability[value] == undefined,
-        'partially' : desk_availability[value] == 1,
-        'booked': desk_availability[value] == 2}" (click)="openModal(value, false)">
-        </button>
+        <button
+          class="desk"
+          [ngClass]="{
+            available:
+              desk_availability[value] == 0 ||
+              desk_availability[value] == undefined,
+            partially: desk_availability[value] == 1,
+            booked: desk_availability[value] == 2
+          }"
+          (click)="openModal(value, false)"
+        ></button>
       </ng-container>
     </div>
   </div>
   <div class="rightDesks">
-    <div class="desks" *ngFor="let key of (desks | keyvalue | slice:4:5)">
+    <div class="desks" *ngFor="let key of desks | keyvalue | slice : 4 : 5">
       <ng-container *ngFor="let value of key.value">
-        <button class="desk" [ngClass]="{
-        'available' : desk_availability[value] == 0 || desk_availability[value] == undefined,
-        'partially' : desk_availability[value] == 1,
-        'booked': desk_availability[value] == 2}" (click)="openModal(value, false)">
-        </button>
+        <button
+          class="desk"
+          [ngClass]="{
+            available:
+              desk_availability[value] == 0 ||
+              desk_availability[value] == undefined,
+            partially: desk_availability[value] == 1,
+            booked: desk_availability[value] == 2
+          }"
+          (click)="openModal(value, false)"
+        ></button>
       </ng-container>
     </div>
-    <div class="specialDesks" *ngFor="let key of special_desks|keyvalue">
+    <div class="specialDesks" *ngFor="let key of special_desks | keyvalue">
       <ng-container *ngFor="let value of key.value">
-        <button class="desk" [ngClass]="{
-        'available' : desk_availability[value] == 0 || desk_availability[value] == undefined,
-        'partially' : desk_availability[value] == 1,
-        'booked': desk_availability[value] == 2}" (click)="openModal(value, false)">
-        </button>
+        <button
+          class="desk"
+          [ngClass]="{
+            available:
+              desk_availability[value] == 0 ||
+              desk_availability[value] == undefined,
+            partially: desk_availability[value] == 1,
+            booked: desk_availability[value] == 2
+          }"
+          (click)="openModal(value, false)"
+        ></button>
       </ng-container>
     </div>
   </div>
 </div>
-

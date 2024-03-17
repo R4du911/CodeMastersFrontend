@@ -18,7 +18,7 @@ body.components {
   margin: 2px;
   height: 40px;
   width: 50px;
-  background-image: url('../../../../assets/desk3.png');
+  background-image: url("../../../../assets/desk3.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center center;
@@ -37,4 +37,3 @@ body.components {
 .booked {
   background-color: #f35c6e;
 }
-

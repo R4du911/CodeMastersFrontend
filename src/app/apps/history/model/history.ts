@@ -4,6 +4,5 @@ export class History {
     public deskBooked: string,
     public startBookingTime: string,
     public endBookingTime: string
-  ) {
-  }
+  ) {}
 }

@@ -3,8 +3,8 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin-bottom:20px;
-  margin-top:10px;
+  margin-bottom: 20px;
+  margin-top: 10px;
 }
 
 .desks {
@@ -18,7 +18,7 @@
   margin: 2px;
   height: 40px;
   width: 50px;
-  background-image: url('../../../../assets/desk3.png');
+  background-image: url("../../../../assets/desk3.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center center;
@@ -32,9 +32,9 @@
   width: 100px;
   border: thin solid black;
   border-radius: 30px;
-  font-family:'Bauhaus 93';
-  font-size:18px;
-  font-weight:100;
+  font-family: "Bauhaus 93";
+  font-size: 18px;
+  font-weight: 100;
 }
 .available {
   background-color: #7dd87d;
@@ -47,4 +47,3 @@
 .booked {
   background-color: #f35c6e;
 }
-

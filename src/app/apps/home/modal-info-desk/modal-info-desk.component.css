@@ -1,13 +1,13 @@
 .wrapper {
-    text-align: center;
-    background-color:#1a1a1a;
-  }
-  
-  .interval-grid {
-    display: flex;
-    flex-direction:column;
-    grid-gap: 10px;
-  }
+  text-align: center;
+  background-color: #1a1a1a;
+}
+
+.interval-grid {
+  display: flex;
+  flex-direction: column;
+  grid-gap: 10px;
+}
 
 .interval-item {
   display: flex;
@@ -17,10 +17,10 @@
 
 .saveBtn {
   background-color: #f7ec77;
-  height:50px;
-  width:90px;
-  border:none;
-  border-radius:5px;
+  height: 50px;
+  width: 90px;
+  border: none;
+  border-radius: 5px;
 }
 
 .cancelBtn {
@@ -38,9 +38,8 @@
   border: none;
   outline: none;
   background-color: white;
-
 }
 
-input::placeholder{
-    color:black;
+input::placeholder {
+  color: black;
 }

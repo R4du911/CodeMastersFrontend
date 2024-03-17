@@ -18,12 +18,17 @@
       </ng-container>
 
       <ng-container matColumnDef="Start">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header="startBookingTime">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header="startBookingTime"
+        >
           Start
         </th>
-        <td mat-cell *matCellDef="let element">{{ element.startBookingTime }}</td>
+        <td mat-cell *matCellDef="let element">
+          {{ element.startBookingTime }}
+        </td>
       </ng-container>
-
 
       <ng-container matColumnDef="End">
         <th mat-header-cell *matHeaderCellDef mat-sort-header="endBookingTime">
@@ -34,27 +39,11 @@
 
       <tr
         mat-header-row
-        *matHeaderRowDef="
-          [
-            'Username',
-            'Desk',
-            'Start',
-            'End',
-          ];
-          sticky: true
-        "
+        *matHeaderRowDef="['Username', 'Desk', 'Start', 'End']; sticky: true"
       ></tr>
       <tr
         mat-row
-        *matRowDef="
-          let row;
-          columns: [
-            'Username',
-            'Desk',
-            'Start',
-            'End',
-          ];
-        "
+        *matRowDef="let row; columns: ['Username', 'Desk', 'Start', 'End']"
       ></tr>
     </table>
     <mat-paginator

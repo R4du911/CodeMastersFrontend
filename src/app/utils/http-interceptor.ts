@@ -6,11 +6,11 @@ import {
   HttpRequest,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {catchError, from, Observable, switchMap, throwError} from 'rxjs';
-import {AuthenticationService} from "../core/authentication/authentication.service";
-import {CustomErrorResponse} from "./error-handling/model/custom-error-response";
-import {RefreshTokenResponse} from "../auth/login/model/refresh-token-response";
-import {ErrorHandlingService} from "./error-handling/service/error-handling.service";
+import { catchError, from, Observable, switchMap, throwError } from 'rxjs';
+import { AuthenticationService } from '../core/authentication/authentication.service';
+import { CustomErrorResponse } from './error-handling/model/custom-error-response';
+import { RefreshTokenResponse } from '../auth/login/model/refresh-token-response';
+import { ErrorHandlingService } from './error-handling/service/error-handling.service';
 
 @Injectable()
 export class Interceptor implements HttpInterceptor {
@@ -28,7 +28,7 @@ export class Interceptor implements HttpInterceptor {
         'Authorization',
         sessionStorage.getItem('token') ?? ``
       ),
-      withCredentials: true
+      withCredentials: true,
     });
 
     return next.handle(req).pipe(
@@ -45,11 +45,11 @@ export class Interceptor implements HttpInterceptor {
 
   refreshTokenMethod(
     request: HttpRequest<any>,
-    next: HttpHandler,
+    next: HttpHandler
   ): Observable<HttpEvent<any>> {
     return from(this.authenticationService.refreshToken()).pipe(
       switchMap((res: RefreshTokenResponse) => {
-        if(sessionStorage.getItem('token')){
+        if (sessionStorage.getItem('token')) {
           sessionStorage.removeItem('token');
         }
         sessionStorage.setItem('token', res.renewedAccessToken);
@@ -58,21 +58,21 @@ export class Interceptor implements HttpInterceptor {
           headers: request.headers.set(
             'Authorization',
             sessionStorage.getItem('token') ?? ``
-          )
+          ),
         });
 
         return next.handle(request).pipe(
           catchError((error: HttpErrorResponse) => {
             if (error.status == 403) {
-              this.authenticationService.logout()
-              this.toastrService.handleInformative("Session expired");
+              this.authenticationService.logout();
+              this.toastrService.handleInformative('Session expired');
             }
 
             this.toastrService.handleError(error.error as CustomErrorResponse);
             return throwError('');
-          }))
+          })
+        );
       })
     );
   }
-
 }

@@ -2,19 +2,21 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/components/login.component';
-import {AuthorizationGuard} from "../utils/authorization-guard.service";
-import {ERole} from "../core/authorization/model/erole";
+import { AuthorizationGuard } from '../utils/authorization-guard.service';
+import { ERole } from '../core/authorization/model/erole';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'login',
+  {
+    path: 'login',
     component: LoginComponent,
-    canActivate: [AuthorizationGuard]
+    canActivate: [AuthorizationGuard],
   },
-  { path: 'register',
+  {
+    path: 'register',
     component: RegisterComponent,
     canActivate: [AuthorizationGuard],
-    data: {roles: [ERole.Administrator]}
+    data: { roles: [ERole.Administrator] },
   },
 ];
 

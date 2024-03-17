@@ -1,21 +1,27 @@
-import {AfterContentInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {HistoryService} from "../service/history.service";
-import {Observable, Subject} from "rxjs";
-import {History} from "../model/history";
-import {AuthorizationService} from "../../../core/authorization/service/authorization.service";
-import {ERole} from "../../../core/authorization/model/erole";
-import {MatTableDataSource} from "@angular/material/table";
-import {MatPaginator} from "@angular/material/paginator";
-import {MatSort} from "@angular/material/sort";
+import {
+  AfterContentInit,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import { HistoryService } from '../service/history.service';
+import { Observable, Subject } from 'rxjs';
+import { History } from '../model/history';
+import { AuthorizationService } from '../../../core/authorization/service/authorization.service';
+import { ERole } from '../../../core/authorization/model/erole';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-history',
   templateUrl: './history.component.html',
-  styleUrl: './history.component.css'
+  styleUrl: './history.component.css',
 })
-export class HistoryComponent implements OnInit, OnDestroy, AfterContentInit{
+export class HistoryComponent implements OnInit, OnDestroy, AfterContentInit {
   historyList$: Observable<History[]> = new Observable<History[]>();
-  private _componentDestroy$ = new Subject<void>;
+  private _componentDestroy$ = new Subject<void>();
   dataSource = new MatTableDataSource<History>();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -23,9 +29,8 @@ export class HistoryComponent implements OnInit, OnDestroy, AfterContentInit{
 
   constructor(
     private historyService: HistoryService,
-    private authorizationService : AuthorizationService
-  ) {
-  }
+    private authorizationService: AuthorizationService
+  ) {}
 
   ngOnDestroy(): void {
     this._componentDestroy$.next();
@@ -33,13 +38,13 @@ export class HistoryComponent implements OnInit, OnDestroy, AfterContentInit{
   }
 
   ngOnInit(): void {
-    const userRole : ERole[] = this.authorizationService.getUserRoles();
-    if(userRole.includes(ERole.Employee)) {
-      this.historyService.loadBookingDeskByUserUsername().subscribe()
+    const userRole: ERole[] = this.authorizationService.getUserRoles();
+    if (userRole.includes(ERole.Employee)) {
+      this.historyService.loadBookingDeskByUserUsername().subscribe();
     }
 
-    if(userRole.includes(ERole.Administrator))
-      this.historyService.loadAllBookings().subscribe()
+    if (userRole.includes(ERole.Administrator))
+      this.historyService.loadAllBookings().subscribe();
 
     this.historyList$ = this.historyService.getHistories();
   }
@@ -51,7 +56,4 @@ export class HistoryComponent implements OnInit, OnDestroy, AfterContentInit{
       this.dataSource.sort = this.sort;
     });
   }
-
-
-
 }

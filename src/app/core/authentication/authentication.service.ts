@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import {Router} from "@angular/router";
-import {BehaviorSubject, Observable} from "rxjs";
-import jwtDecode from "jwt-decode";
-import {HttpClient} from "@angular/common/http";
+import { Router } from '@angular/router';
+import { BehaviorSubject, Observable } from 'rxjs';
+import jwtDecode from 'jwt-decode';
+import { HttpClient } from '@angular/common/http';
 import { RefreshTokenResponse } from '../../auth/login/model/refresh-token-response';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthenticationService {
   url: string = 'http://localhost:8080/auth/';
@@ -18,10 +18,7 @@ export class AuthenticationService {
 
   private _firstLogin = false;
 
-  constructor(
-    private router: Router,
-    private http: HttpClient
-  ) {
+  constructor(private router: Router, private http: HttpClient) {
     this.currentUser$ = this.currentUserSubject$.asObservable();
   }
 
@@ -55,12 +52,11 @@ export class AuthenticationService {
     return this.currentUserSubject$.getValue() != null;
   }
 
-  setCurrentUser(username: string|null): void {
+  setCurrentUser(username: string | null): void {
     this.currentUserSubject$.next(username);
   }
 
-  refreshToken() : Observable<RefreshTokenResponse> {
+  refreshToken(): Observable<RefreshTokenResponse> {
     return this.http.get<RefreshTokenResponse>(this.url + 'refreshToken');
   }
-
 }

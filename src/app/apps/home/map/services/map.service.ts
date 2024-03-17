@@ -1,25 +1,24 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
+import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs';
 import { CreateBookingDesk, Request } from './request';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MapService {
   url: string = 'http://localhost:8080/booking';
   url1: string = 'http://localhost:8080/createBooking';
   url2: string = 'http://localhost:8080/desk';
 
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getDeskAvailability(id: any, date: Request) {
     const start_date = this.formatDate(date.start_date) + 'T07:00:00';
     const end_date = this.formatDate(date.end_date) + 'T19:00:00';
     const da = {
       start_date,
-      end_date
+      end_date,
     };
 
     return this.http.post<Request>(`${this.url}/${id}`, da).pipe(
@@ -34,7 +33,7 @@ export class MapService {
     const end_date = this.formatDate(date.end_date) + 'T19:00:00';
     const da = {
       start_date,
-      end_date
+      end_date,
     };
 
     return this.http.post<Request>(`${this.url}/day/${id}`, da).pipe(
@@ -44,21 +43,24 @@ export class MapService {
     );
   }
 
-  createBookingDesk(createBookingDesk:CreateBookingDesk) {
-    const start_date = this.formatDate(createBookingDesk.start_date) + 'T07:00:00';
+  createBookingDesk(createBookingDesk: CreateBookingDesk) {
+    const start_date =
+      this.formatDate(createBookingDesk.start_date) + 'T07:00:00';
     const end_date = this.formatDate(createBookingDesk.end_date) + 'T19:00:00';
 
-    return this.http.post<CreateBookingDesk>(`${this.url1}`, createBookingDesk).pipe(
-      map((response: any) => {
-        return response;
-      })
-    );
+    return this.http
+      .post<CreateBookingDesk>(`${this.url1}`, createBookingDesk)
+      .pipe(
+        map((response: any) => {
+          return response;
+        })
+      );
   }
 
   getRoomCapacity(id: any) {
     return this.http.get(`${this.url2}/desks/roomCapacity/${id}`).pipe(
       map((response: any) => {
-        console.log(response)
+        console.log(response);
         return response;
       })
     );

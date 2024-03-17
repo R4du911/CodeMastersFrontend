@@ -88,9 +88,9 @@ export class ModalInfoDeskComponent {
   onSubmit(interval: string) {
     this.eventService.selectedDate$.subscribe((date) => {
       const start_date =
-      this.formatDate(date.toDateString()) + 'T' + interval.split('-')[0];
-    const end_date =
-      this.formatDate(date.toDateString()) + 'T' + interval.split('-')[1];
+        this.formatDate(date.toDateString()) + 'T' + interval.split('-')[0];
+      const end_date =
+        this.formatDate(date.toDateString()) + 'T' + interval.split('-')[1];
 
       const request: any = {
         deskId: this.data.id,
@@ -101,12 +101,13 @@ export class ModalInfoDeskComponent {
 
       this.mapService.createBookingDesk(request).subscribe(
         (response: any) => {
-          this.closeModal()
+          this.closeModal();
+          this.handleErrorService.handleSuccess('Created booking desh');
         },
         (error: CustomErrorResponse) => {
           this.handleErrorService.handleError(error);
         }
       );
-    })
+    });
   }
 }

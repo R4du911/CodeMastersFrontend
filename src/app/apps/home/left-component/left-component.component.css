@@ -18,7 +18,7 @@ body.components {
   margin: 2px;
   height: 40px;
   width: 50px;
-  background-image: url('../../../../assets/desk2.png');
+  background-image: url('../../../../assets/desk3.png');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center center;
@@ -27,11 +27,11 @@ body.components {
 }
 
 .available {
-  background-color: #7ac38f;
+  background-color: #7dd87d;
 }
 
 .partially {
-  background-color: #f2fc9f;
+  background-color: #f7ec77;
 }
 
 .booked {
